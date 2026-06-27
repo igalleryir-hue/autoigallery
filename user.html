@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>پنل کاربران iGallery</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="userPage">
+  <header class="topbar dashboardTopbar">
+    <a class="brand" href="/"><img src="/assets/igallery-logo.png" alt="iGallery" /><span class="brandText">پنل کاربران</span></a>
+    <nav>
+      <a class="navLink" href="/">صفحه اصلی</a>
+      <button id="userLogout" class="btn small ghost hidden" onclick="userLogout()">خروج</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="userHero">
+      <div>
+        <p class="eyebrow">حساب کاربری iGallery</p>
+        <h1>ورود و ثبت‌نام کاربران</h1>
+        <p>کاربران با شماره موبایل وارد می‌شوند، خودروهای موجود را می‌بینند و درخواست پیگیری خریدشان ثبت می‌شود. کاربران می‌توانند آگهی خودرو ثبت کنند؛ آگهی فقط بعد از تایید مدیر در سایت نمایش داده می‌شود.</p>
+      </div>
+      <img src="/assets/igallery-logo.png" alt="iGallery" />
+    </section>
+
+    <section id="userAuthBox" class="authGrid">
+      <div class="panel" id="register">
+        <p class="eyebrow">ثبت‌نام جدید</p>
+        <h2>ثبت‌نام کاربر</h2>
+        <div class="form oneCol">
+          <input id="userFirstName" placeholder="نام" />
+          <input id="userLastName" placeholder="نام خانوادگی" />
+          <input id="userRegisterPhone" placeholder="شماره موبایل" />
+          <button class="btn" onclick="userRegister()">ثبت‌نام و ورود</button>
+        </div>
+        <p id="userRegisterMsg" class="msg"></p>
+      </div>
+
+      <div class="panel">
+        <p class="eyebrow">ورود سریع</p>
+        <h2>ورود کاربر</h2>
+        <div class="form oneCol">
+          <input id="userLoginPhone" placeholder="شماره موبایل" />
+          <button class="btn" onclick="userLogin()">ورود به سایت</button>
+        </div>
+        <p id="userLoginMsg" class="msg"></p>
+      </div>
+    </section>
+
+    <section id="userApp" class="hidden">
+      <div class="splitPanel">
+        <div>
+          <p class="eyebrow">خوش آمدید</p>
+          <h2 id="userWelcome">پنل کاربری</h2>
+          <p>از این بخش می‌توانید خودروهای موجود را ببینید و آگهی فروش خودرو را برای بررسی مدیر ثبت کنید.</p>
+        </div>
+        <a class="btn" href="tel:09123060749">تماس با iGallery</a>
+      </div>
+
+      <section class="panel" id="submit-ad">
+        <div class="sectionTitle"><div><p class="eyebrow">ثبت آگهی فروش</p><h2>ثبت آگهی خودرو با تایید مدیر</h2></div></div>
+        <p class="msg">بعد از ثبت، آگهی شما ابتدا برای مدیر iGallery ارسال می‌شود و پس از تایید در سایت نمایش داده خواهد شد.</p>
+        <form id="userCarForm" class="form">
+          <input name="title" placeholder="عنوان؛ مثلاً پژو ۲۰۷ اتوماتیک" required />
+          <input name="brand" placeholder="برند" required />
+          <input name="model" placeholder="مدل" required />
+          <input name="year" type="number" placeholder="سال ساخت" required />
+          <input name="mileage" type="number" placeholder="کارکرد کیلومتر" required />
+          <input name="price" type="number" placeholder="قیمت تومان" required />
+          <input name="color" placeholder="رنگ" />
+          <select name="transmission"><option value="">گیربکس</option><option>اتوماتیک</option><option>دنده‌ای</option></select>
+          <select name="fuel"><option value="">سوخت</option><option>بنزین</option><option>دوگانه‌سوز</option><option>هیبرید</option><option>برقی</option></select>
+          <input name="body_status" placeholder="وضعیت بدنه" />
+          <input name="image" type="file" accept="image/*" />
+          <textarea name="description" placeholder="توضیحات خودرو"></textarea>
+          <button class="btn" type="submit">ارسال آگهی برای تایید</button>
+        </form>
+        <p id="userCarMsg" class="msg"></p>
+      </section>
+
+      <div class="sectionTitle"><div><p class="eyebrow">آگهی‌های من</p><h2>وضعیت آگهی‌های ثبت‌شده</h2></div></div>
+      <div id="userMyAds" class="grid"></div>
+
+      <div class="sectionTitle"><div><p class="eyebrow">خودروهای موجود</p><h2>لیست خودروها</h2></div><span id="userCount" class="counter"></span></div>
+      <div id="userCars" class="grid"></div>
+    </section>
+  </main>
+  <script src="/script.js"></script>
+</body>
+</html>
