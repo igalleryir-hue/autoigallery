@@ -221,4 +221,6 @@ app.delete('/api/cars/:id', requireAdmin, (req, res) => {
 });
 
 app.get('*', (_, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
-app.listen(PORT, () => console.log(`iGallery running on http://localhost:${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`iGallery running on port ${PORT}`);
+});
