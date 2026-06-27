@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>پنل مدیریت iGallery</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="adminPage">
+  <header class="topbar dashboardTopbar">
+    <a class="brand" href="/"><img src="/assets/igallery-logo.png" alt="iGallery" /><span class="brandText">پنل مدیریت</span></a>
+    <nav>
+      <a class="navLink" href="/">مشاهده سایت</a>
+      <button id="adminLogout" class="btn small ghost hidden" onclick="adminLogout()">خروج</button>
+    </nav>
+  </header>
+
+  <main class="dashboardLayout">
+    <aside class="sidePanel">
+      <img src="/assets/igallery-logo.png" alt="iGallery" class="sideLogo" />
+      <a href="#overview" class="sideLink active">داشبورد</a>
+      <a href="#new-car" class="sideLink">ثبت خودرو</a>
+      <a href="#pending-admin" class="sideLink">تایید آگهی‌ها</a>
+      <a href="#cars-admin" class="sideLink">مدیریت خودروها</a>
+      <a href="#leads-admin" class="sideLink">ثبت‌نامی‌ها</a>
+      <a href="#users-admin" class="sideLink">کاربران سایت</a>
+    </aside>
+
+    <section class="dashboardContent">
+      <div id="adminLoginBox" class="panel authPanel">
+        <p class="eyebrow">ورود امن مدیر</p>
+        <h1>ورود به پنل مدیریت نمایشگاه iGallery</h1>
+        <p>این بخش فقط مخصوص مدیر نمایشگاه است.</p>
+        <div class="form twoCols">
+          <input id="adminPhone" placeholder="موبایل مدیر" value="09123060749" />
+          <input id="adminPassword" type="password" placeholder="رمز عبور" />
+          <button class="btn" onclick="adminLogin()">ورود مدیر</button>
+        </div>
+        <p id="adminAuthMsg" class="msg"></p>
+      </div>
+
+      <div id="adminApp" class="hidden">
+        <section id="overview" class="dashboardHero">
+          <div>
+            <p class="eyebrow">داشبورد مدیریت</p>
+            <h1>مدیریت حرفه‌ای نمایشگاه iGallery</h1>
+            <p>ثبت خودرو، تایید آگهی‌های کاربران، مدیریت موجودی نمایشگاه، مشاهده ثبت‌نامی‌ها و کاربران سایت در یک پنل جداگانه.</p>
+          </div>
+        </section>
+
+        <section class="statsGrid">
+          <article class="statCard"><span>خودروهای منتشرشده</span><strong id="statCars">۰</strong></article>
+          <article class="statCard"><span>در انتظار تایید</span><strong id="statPending">۰</strong></article>
+          <article class="statCard"><span>ثبت‌نامی‌های خرید</span><strong id="statLeads">۰</strong></article>
+          <article class="statCard"><span>کاربران سایت</span><strong id="statUsers">۰</strong></article>
+          <article class="statCard"><span>قیمت‌گذاری‌ها</span><strong id="statValuations">۰</strong></article>
+        </section>
+
+        <section class="panel" id="new-car">
+          <div class="sectionTitle"><div><p class="eyebrow">ثبت خودرو</p><h2>افزودن خودرو جدید</h2></div></div>
+          <form id="adminCarForm" class="form">
+            <input name="title" placeholder="عنوان؛ مثلاً پژو ۲۰۷ اتوماتیک" required />
+            <input name="brand" placeholder="برند" required />
+            <input name="model" placeholder="مدل" required />
+            <input name="year" type="number" placeholder="سال ساخت" required />
+            <input name="mileage" type="number" placeholder="کارکرد کیلومتر" required />
+            <input name="price" type="number" placeholder="قیمت تومان" required />
+            <input name="color" placeholder="رنگ" />
+            <select name="transmission"><option value="">گیربکس</option><option>اتوماتیک</option><option>دنده‌ای</option></select>
+            <select name="fuel"><option value="">سوخت</option><option>بنزین</option><option>دوگانه‌سوز</option><option>هیبرید</option><option>برقی</option></select>
+            <input name="body_status" placeholder="وضعیت بدنه" />
+            <input name="seller_name" placeholder="نام فروشنده" value="iGallery" required />
+            <input name="seller_phone" placeholder="شماره تماس" value="09123060749" required />
+            <input name="image" type="file" accept="image/*" />
+            <textarea name="description" placeholder="توضیحات خودرو"></textarea>
+            <button class="btn" type="submit">ثبت خودرو</button>
+          </form>
+          <p id="adminFormMsg" class="msg"></p>
+        </section>
+
+        <section class="panel" id="pending-admin">
+          <div class="sectionTitle"><div><p class="eyebrow">بررسی آگهی کاربران</p><h2>آگهی‌های در انتظار تایید</h2></div><button class="btn ghost" onclick="adminLoadPendingCars()">به‌روزرسانی</button></div>
+          <p class="msg">آگهی‌هایی که کاربران ثبت می‌کنند تا زمان تایید مدیر در سایت عمومی نمایش داده نمی‌شوند.</p>
+          <div id="adminPendingCars" class="grid"></div>
+        </section>
+
+        <section class="panel" id="pricing-admin">
+          <div class="sectionTitle"><div><p class="eyebrow">قیمت‌گذاری خودکار</p><h2>درخواست‌های قیمت‌گذاری کاربران</h2></div><button class="btn ghost" onclick="adminLoadPriceRequests()">به‌روزرسانی</button></div>
+          <p class="msg">سیستم بر اساس نمونه‌های ثبت‌شده در iGallery و نمونه‌های بازار که از پنل وارد می‌کنید، بازه قیمت و قیمت خرید فوری را محاسبه می‌کند.</p>
+          <div id="adminPriceRequests" class="tableList pricingList"></div>
+        </section>
+
+        <section class="panel" id="market-samples-admin">
+          <div class="sectionTitle"><div><p class="eyebrow">داده بازار</p><h2>افزودن نمونه قیمت از سایت‌های ایرانی</h2></div></div>
+          <p class="msg">هر نمونه قیمت از باما، دیوار، همراه‌مکانیک، کارنامه یا منابع مجاز دیگر را اینجا وارد کنید تا موتور قیمت‌گذاری دقیق‌تر شود. اگر بعداً API رسمی گرفتید، همین بخش قابل اتصال خودکار است.</p>
+          <form id="priceSampleForm" class="form">
+            <input name="source_name" placeholder="منبع؛ مثلاً باما / دیوار / کارنامه" required />
+            <input name="source_url" placeholder="لینک نمونه قیمت؛ اختیاری" />
+            <input name="brand" placeholder="برند" required />
+            <input name="model" placeholder="مدل" required />
+            <input name="year" type="number" placeholder="سال ساخت" required />
+            <input name="mileage" type="number" placeholder="کارکرد کیلومتر" />
+            <input name="price" type="number" placeholder="قیمت تومان" required />
+            <input name="city" placeholder="شهر" />
+            <input name="body_status" placeholder="وضعیت بدنه" />
+            <select name="transmission"><option value="">گیربکس</option><option>اتوماتیک</option><option>دنده‌ای</option></select>
+            <button class="btn" type="submit">ذخیره نمونه بازار</button>
+          </form>
+          <p id="priceSampleMsg" class="msg"></p>
+          <div id="adminPriceSamples" class="tableList compactTable"></div>
+        </section>
+
+        <section class="panel" id="cars-admin">
+          <div class="sectionTitle"><div><p class="eyebrow">موجودی</p><h2>مدیریت خودروها</h2></div><button class="btn ghost" onclick="adminLoadCars()">به‌روزرسانی</button></div>
+          <div id="adminCars" class="grid"></div>
+        </section>
+
+        <section class="panel" id="leads-admin">
+          <div class="sectionTitle"><div><p class="eyebrow">خریداران</p><h2>ثبت‌نامی‌های خریداران</h2></div><button class="btn ghost" onclick="adminLoadLeads()">به‌روزرسانی</button></div>
+          <div id="adminLeads" class="tableList"></div>
+        </section>
+
+        <section class="panel" id="users-admin">
+          <div class="sectionTitle"><div><p class="eyebrow">کاربران</p><h2>کاربران واردشده به سایت</h2></div><button class="btn ghost" onclick="adminLoadUsers()">به‌روزرسانی</button></div>
+          <div id="adminUsers" class="tableList"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script src="/script.js"></script>
+</body>
+</html>

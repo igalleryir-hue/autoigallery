@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>نمایشگاه iGallery | خرید و فروش سریع خودرو</title>
+  <meta name="description" content="نمایشگاه iGallery؛ خرید و فروش سریع خودرو، قیمت‌گذاری منصفانه، معاوضه و مشاوره خرید و فروش در گنبدکاووس" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="ig-final-page">
+  <header class="ig-hero">
+    <div class="ig-hero__copy">
+      <h1>خرید و فروش <span>سریع</span> خودرو</h1>
+      <p class="ig-hero__subtitle">قیمت‌گذاری منصفانه <b>|</b> معاوضه و تعویض خودرو <b>|</b> مشاوره خرید و فروش</p>
+
+      <div class="ig-hero__badges">
+        <div>
+          <span class="ig-icon">◷</span>
+          <strong>ماشینت رو سریع‌تر بفروش</strong>
+          <small>قیمت‌گذاری دقیق و پرداخت سریع</small>
+        </div>
+        <div>
+          <span class="ig-icon">⌁</span>
+          <strong>خودروی بعدیتو مطمئن‌تر بخر</strong>
+          <small>بررسی فنی و اصالت خودروها</small>
+        </div>
+      </div>
+
+      <p class="ig-location">📍 گنبدکاووس، جاده مینودشت، بعد از بریدگی اول</p>
+    </div>
+
+    <div class="ig-hero__logo">
+      <img src="/assets/igallery-logo.png" alt="نمایشگاه iGallery" />
+    </div>
+  </header>
+
+  <nav class="ig-nav">
+    <div class="ig-nav__links">
+      <a class="active" href="/">صفحه اصلی</a>
+      <a href="#cars-section">همه خودروها</a>
+      <a href="#smart-pricing">قیمت‌گذاری خودرو</a>
+      <a href="/user.html">ورود کاربران</a>
+      <a href="/admin.html">مدیریت</a>
+    </div>
+
+    <div class="ig-nav__contact">
+      <a class="ig-phone" href="tel:09123060749">☎ 09123060749</a>
+      <a href="https://www.instagram.com/igallery.ir?igsh=MWJteWVneXZrYW9kOA==" target="_blank" rel="noopener">Instagram <small>iGallery.ir</small></a>
+      <a href="http://rubika.ir/iGalleryy" target="_blank" rel="noopener">Rubika <small>روبیکا</small></a>
+    </div>
+  </nav>
+
+  <main class="ig-main">
+    <section class="ig-search-panel" aria-label="فیلتر خودروها">
+      <div class="ig-search-field ig-brand-field">
+        <label>برند</label>
+        <select id="brand" onchange="loadCars()">
+          <option value="">همه برندها</option>
+          <option>پژو</option>
+          <option>دنا</option>
+          <option>تارا</option>
+          <option>رانا</option>
+          <option>کوییک</option>
+          <option>شاهین</option>
+          <option>چانگان</option>
+          <option>فونیکس</option>
+          <option>هیوندای</option>
+          <option>کیا</option>
+          <option>BMW</option>
+          <option>بنز</option>
+          <option>تویوتا</option>
+        </select>
+      </div>
+
+      <div class="ig-search-field">
+        <label>مدل</label>
+        <input id="q" placeholder="همه مدل‌ها" oninput="loadCars()" />
+      </div>
+
+      <div class="ig-search-field double">
+        <label>سال</label>
+        <div>
+          <input id="minYear" type="number" placeholder="از سال" oninput="loadCars()" />
+          <input id="maxYear" type="number" placeholder="تا سال" oninput="loadCars()" />
+        </div>
+      </div>
+
+      <div class="ig-search-field double">
+        <label>قیمت (تومان)</label>
+        <div>
+          <input id="minPrice" type="number" placeholder="از قیمت" oninput="loadCars()" />
+          <input id="maxPrice" type="number" placeholder="تا قیمت" oninput="loadCars()" />
+        </div>
+      </div>
+
+      <div class="ig-search-field double">
+        <label>کارکرد (کیلومتر)</label>
+        <div>
+          <input placeholder="از کارکرد" disabled />
+          <input id="maxMileage" type="number" placeholder="تا کارکرد" oninput="loadCars()" />
+        </div>
+      </div>
+
+      <input id="transmission" type="hidden" value="" />
+      <input id="bodyStatus" type="hidden" value="" />
+      <select id="sort" class="ig-hidden-sort" onchange="loadCars()">
+        <option value="new">جدیدترین</option>
+        <option value="cheap">ارزان‌ترین</option>
+        <option value="expensive">گران‌ترین</option>
+      </select>
+      <label class="ig-hidden-sort"><input id="pricedOnly" type="checkbox" /> فقط قیمت‌دار</label>
+      <label class="ig-hidden-sort"><input type="radio" name="usage" value="" checked /> همه</label>
+
+      <div class="ig-search-actions">
+        <button class="ig-search-btn" type="button" onclick="loadCars()">جستجو</button>
+        <button class="ig-clear-btn" type="button" onclick="resetFilters()">پاک کردن فیلترها</button>
+      </div>
+    </section>
+
+    <section class="ig-content-grid">
+      <section class="ig-cars-section" id="cars-section">
+        <div class="ig-section-head">
+          <a href="#cars-section">مشاهده همه خودروها</a>
+          <h2>آخرین خودروهای موجود</h2>
+          <span id="count"></span>
+        </div>
+        <div id="activeFilters" class="activeFilters ig-active-filters"></div>
+        <div id="carsGrid" class="productGrid ig-cars-grid"></div>
+        <div class="ig-cars-actions">
+          <a class="ig-outline-btn" href="/user.html#submit-ad">ثبت آگهی خودرو</a>
+          <a class="ig-outline-btn" href="tel:09123060749">مشاوره خرید</a>
+        </div>
+      </section>
+
+      <aside class="ig-pricing-widget" id="smart-pricing">
+        <div class="ig-pricing-title">
+          <span>✧</span>
+          <div>
+            <h2>قیمت‌گذاری هوشمند خودرو</h2>
+            <p>اطلاعات خودرو را وارد کنید تا قیمت دقیق و منصفانه دریافت کنید.</p>
+          </div>
+        </div>
+
+        <div class="ig-pricing-body">
+          <form class="ig-pricing-form" id="publicEstimateForm">
+            <label>برند خودرو</label>
+            <select name="brand">
+              <option>انتخاب برند</option>
+              <option>پژو</option><option>دنا</option><option>تارا</option><option>هیوندای</option><option>کیا</option><option>تویوتا</option><option>بنز</option>
+            </select>
+
+            <label>مدل خودرو</label>
+            <input name="model" placeholder="انتخاب مدل" />
+
+            <label>سال تولید</label>
+            <input name="year" type="number" placeholder="انتخاب سال" />
+
+            <label>کارکرد (کیلومتر)</label>
+            <input name="mileage" type="number" placeholder="مثال: ۵۰۰۰۰" />
+
+            <button type="submit">محاسبه قیمت</button>
+          </form>
+
+          <div class="ig-price-result" id="publicPriceResult">
+            <div class="ig-result-head">
+              <h3>نتیجه قیمت‌گذاری</h3>
+              <span>▰</span>
+            </div>
+            <div class="ig-price-row"><span>کف قیمت بازار</span><strong id="publicLow">۲,۶۲۰,۰۰۰,۰۰۰ تومان</strong></div>
+            <div class="ig-price-row best"><span>قیمت پیشنهادی فروش <b>BEST</b></span><strong id="publicMid">۲,۸۹۰,۰۰۰,۰۰۰ تومان</strong></div>
+            <div class="ig-price-row buy"><span>قیمت خرید فوری نمایشگاه</span><strong id="publicBuy">۲,۵۳۰,۰۰۰,۰۰۰ تومان</strong></div>
+            <div class="ig-confidence"><span>● ۹۲٪</span><small>درصد اطمینان</small></div>
+          </div>
+        </div>
+        <p class="ig-pricing-note">* قیمت‌ها تقریبی بوده و بسته به شرایط بازار متغیر است. برای نتیجه دقیق‌تر وارد پنل کاربران شوید.</p>
+      </aside>
+    </section>
+
+    <section class="ig-trust-strip">
+      <div><span>♢</span><strong>ضمانت اصالت خودرو</strong><small>تضمین سلامت و اصالت خودروها</small></div>
+      <div><span>♻</span><strong>معاوضه آسان</strong><small>ارزش‌گذاری و معاوضه در کمترین زمان</small></div>
+      <div><span>٪</span><strong>قیمت‌گذاری منصفانه</strong><small>بر اساس بازار روز و کارشناسی دقیق</small></div>
+      <div><span>☏</span><strong>مشاوره تخصصی</strong><small>پشتیبانی قبل و بعد از خرید</small></div>
+    </section>
+  </main>
+
+  <div id="carModal" class="modal hidden" onclick="closeCarModal(event)">
+    <div class="modalCard" role="dialog" aria-modal="true">
+      <button class="modalClose" onclick="hideCarModal()">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="/script.js"></script>
+  <script>
+    const publicFmt = n => Number(n || 0).toLocaleString('fa-IR') + ' تومان';
+    document.getElementById('publicEstimateForm')?.addEventListener('submit', function(e){
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const brand = String(fd.get('brand') || '');
+      const year = Number(fd.get('year') || 1400);
+      const mileage = Number(fd.get('mileage') || 70000);
+      let base = 900000000;
+      if(brand.includes('پژو')) base = 1350000000;
+      if(brand.includes('دنا')) base = 1150000000;
+      if(brand.includes('تارا')) base = 1250000000;
+      if(brand.includes('هیوندای')) base = 2900000000;
+      if(brand.includes('کیا')) base = 2800000000;
+      if(brand.includes('تویوتا')) base = 3600000000;
+      if(brand.includes('بنز')) base = 5200000000;
+      let mid = base * Math.pow(1.055, year - 1400) * (1 - Math.min(0.22, Math.max(0, mileage - 20000) / 10000 * 0.006));
+      mid = Math.round(mid / 10000000) * 10000000;
+      document.getElementById('publicLow').textContent = publicFmt(mid * 0.94);
+      document.getElementById('publicMid').textContent = publicFmt(mid);
+      document.getElementById('publicBuy').textContent = publicFmt(mid * 0.90);
+    });
+  </script>
+</body>
+</html>
